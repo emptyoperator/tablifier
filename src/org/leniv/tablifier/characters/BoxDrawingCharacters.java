@@ -21,8 +21,8 @@ public class BoxDrawingCharacters {
     }
 
     public static Map<BoxDrawingCharacter, Character> getLightCharacters() {
-        return Stream.of(BoxDrawingCharacter.values())
-                     .collect(Collectors.toMap(Function.identity(), BoxDrawingCharacter::getValue));
+        return new EnumMap<>(Stream.of(BoxDrawingCharacter.values())
+                                   .collect(Collectors.toMap(Function.identity(), BoxDrawingCharacter::getValue)));
     }
 
     public static Map<BoxDrawingCharacter, Character> getHeavyCharacters() {
