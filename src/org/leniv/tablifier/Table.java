@@ -104,15 +104,16 @@ public class Table<T> {
         }
 
         String getCell(int index) {
+            String cell = cells[index];
             return switch (alignment) {
-                case LEFT -> (" %-" + width + "s ").formatted(cells[index]);
+                case LEFT -> (" %-" + width + "s ").formatted(cell);
                 case CENTER -> {
-                    int numberOfSpaces = width - cells[index].length();
-                    String leadingSpaces = " ".repeat(numberOfSpaces / 2 + 1);
-                    String trailingSpaces = " ".repeat((int) Math.round(numberOfSpaces / 2.) + 1);
-                    yield leadingSpaces + cells[index] + trailingSpaces;
+                    int numberOfSpaces = width - cell.length() + 2;
+                    String leadingSpaces = " ".repeat(numberOfSpaces / 2);
+                    String trailingSpaces = " ".repeat(numberOfSpaces - numberOfSpaces / 2);
+                    yield leadingSpaces + cell + trailingSpaces;
                 }
-                case RIGHT -> (" %" + width + "s ").formatted(cells[index]);
+                case RIGHT -> (" %" + width + "s ").formatted(cell);
             };
         }
 
